@@ -2,7 +2,6 @@ package jwt
 
 import (
 	"encoding/json"
-	"errors"
 	// "fmt"
 )
 
@@ -69,22 +68,24 @@ func (m MapClaims) VerifyNotBefore(cmp int64, req bool) bool {
 // be considered a valid claim.
 func (m MapClaims) Valid() error {
 	vErr := new(ValidationError)
-	now := TimeFunc().Unix()
+	/*
+		now := TimeFunc().Unix()
 
-	if m.VerifyExpiresAt(now, false) == false {
-		vErr.Inner = errors.New("Token is expired")
-		vErr.Errors |= ValidationErrorExpired
-	}
+		if m.VerifyExpiresAt(now, false) == false {
+			vErr.Inner = errors.New("Token is expired")
+			vErr.Errors |= ValidationErrorExpired
+		}
 
-	if m.VerifyIssuedAt(now, false) == false {
-		vErr.Inner = errors.New("Token used before issued")
-		vErr.Errors |= ValidationErrorIssuedAt
-	}
+		if m.VerifyIssuedAt(now, false) == false {
+			vErr.Inner = errors.New("Token used before issued")
+			vErr.Errors |= ValidationErrorIssuedAt
+		}
 
-	if m.VerifyNotBefore(now, false) == false {
-		vErr.Inner = errors.New("Token is not valid yet")
-		vErr.Errors |= ValidationErrorNotValidYet
-	}
+		if m.VerifyNotBefore(now, false) == false {
+			vErr.Inner = errors.New("Token is not valid yet")
+			vErr.Errors |= ValidationErrorNotValidYet
+		}
+	*/
 
 	if vErr.valid() {
 		return nil
@@ -92,3 +93,4 @@ func (m MapClaims) Valid() error {
 
 	return vErr
 }
+
